@@ -5,8 +5,8 @@ from app.database import models, schemas
 from app.common.security import get_password_hash, verify_password
 
 
-def get_user(db: Session, user_id: int):
-    return db.query(models.User).filter(models.User.id == user_id).first()
+def get_user(db: Session, id: int):
+    return db.query(models.User).filter(models.User.id == id).first()
 
 
 def get_user_by_email(db: Session, email: str):

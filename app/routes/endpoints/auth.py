@@ -23,13 +23,13 @@ def create_user(
     db: Session = Depends(dep.get_db),
     user_in: schemas.UserCreate,
 ) -> Any:
-    user = crud.user.get_user_by_email(db, email=user_in.email)
+    user = crud.get_user_by_email(db, email=user_in.email)
     if user:
         raise HTTPException(
             status_code=400,
             detail="this email already exists in the system",
         )
-    user = crud.user.create(db, obj_in=user_in)
+    user = crud.create_user(db, user=user_in)
     #회원가입 시 보내는 확인 이메일
     # if user_in.email:
     #     send_new_account_email(

@@ -1,8 +1,14 @@
 from fastapi import FastAPI
+from sqlalchemy import engine
 from starlette.middleware.cors import CORSMiddleware
 
 from app.routes.api import api_router
 from app.common.config import settings
+from app.database import models
+from app.database.conn import engine
+
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title=settings.PROJECT_NAME
